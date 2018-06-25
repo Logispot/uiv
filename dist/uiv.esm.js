@@ -3062,12 +3062,16 @@ var Typeahead = { render: function render() {
       this.initListeners();
     },
     value: function value(_value) {
+      console.log('value : ', _value);
+      console.log('this.inputEl.value : ', this.inputEl.value.trim());
       if (isString(_value)) {
         // direct
-        // this.inputEl.value = value
+        if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '') {
+          this.inputEl.value = _value;
+        }
       } else if (_value) {
         // is object
-        // this.inputEl.value = this.itemKey ? value[this.itemKey] : value
+        this.inputEl.value = this.itemKey ? _value[this.itemKey] : _value;
       } else if (_value === null) {
         // is null or undefined or something else not valid
         this.inputEl.value = '';
@@ -3096,7 +3100,7 @@ var Typeahead = { render: function render() {
         on(this.inputEl, EVENTS.FOCUS, this.inputFocused);
         on(this.inputEl, EVENTS.BLUR, this.inputBlured);
         on(this.inputEl, EVENTS.INPUT, this.inputChanged);
-        on(this.inputEl, EVENTS.KEY_PRESS, this.inputKeyPressed);
+        on(this.inputEl, EVENTS.KEY_DOWN, this.inputKeyPressed);
       }
     },
     removeListeners: function removeListeners() {
@@ -3105,7 +3109,7 @@ var Typeahead = { render: function render() {
         off(this.inputEl, EVENTS.FOCUS, this.inputFocused);
         off(this.inputEl, EVENTS.BLUR, this.inputBlured);
         off(this.inputEl, EVENTS.INPUT, this.inputChanged);
-        off(this.inputEl, EVENTS.KEY_PRESS, this.inputKeyPressed);
+        off(this.inputEl, EVENTS.KEY_DOWN, this.inputKeyPressed);
       }
     },
     prepareItems: function prepareItems(data) {

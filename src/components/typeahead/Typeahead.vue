@@ -125,12 +125,16 @@
         this.initListeners()
       },
       value (value) {
+        console.log('value : ', value)
+        console.log('this.inputEl.value : ', this.inputEl.value.trim())
         if (isString(value)) {
           // direct
-          // this.inputEl.value = value
+          if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '') {
+            this.inputEl.value = value
+          }
         } else if (value) {
           // is object
-          // this.inputEl.value = this.itemKey ? value[this.itemKey] : value
+          this.inputEl.value = this.itemKey ? value[this.itemKey] : value
         } else if (value === null) {
           // is null or undefined or something else not valid
           this.inputEl.value = ''
@@ -156,7 +160,7 @@
           on(this.inputEl, EVENTS.FOCUS, this.inputFocused)
           on(this.inputEl, EVENTS.BLUR, this.inputBlured)
           on(this.inputEl, EVENTS.INPUT, this.inputChanged)
-          on(this.inputEl, EVENTS.KEY_PRESS, this.inputKeyPressed)
+          on(this.inputEl, EVENTS.KEY_DOWN, this.inputKeyPressed)
         }
       },
       removeListeners () {
@@ -165,7 +169,7 @@
           off(this.inputEl, EVENTS.FOCUS, this.inputFocused)
           off(this.inputEl, EVENTS.BLUR, this.inputBlured)
           off(this.inputEl, EVENTS.INPUT, this.inputChanged)
-          off(this.inputEl, EVENTS.KEY_PRESS, this.inputKeyPressed)
+          off(this.inputEl, EVENTS.KEY_DOWN, this.inputKeyPressed)
         }
       },
       prepareItems (data, disableFilters = false) {
