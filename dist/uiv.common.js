@@ -3072,7 +3072,7 @@ var Typeahead = { render: function render() {
       console.log('this.inputEl.value : ', this.inputEl.value.trim());
       if (isString(_value)) {
         // direct
-        if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '') {
+        if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '' || this.inputEl.value !== _value) {
           this.inputEl.value = _value;
         }
       } else if (_value) {

@@ -129,7 +129,7 @@
         console.log('this.inputEl.value : ', this.inputEl.value.trim())
         if (isString(value)) {
           // direct
-          if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '') {
+          if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '' || this.inputEl.value !== value) {
             this.inputEl.value = value
           }
         } else if (value) {
