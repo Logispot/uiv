@@ -23,7 +23,8 @@
             {
               class: {
                 'dropdown-menu': true,
-                'dropdown-menu-right': this.menuRight
+                'dropdown-menu-right': this.menuRight,
+                'dropdown-menu-with-max-height': this.maxHeight
               },
               ref: 'dropdown'
             },
@@ -55,7 +56,11 @@
         default: false
       },
       notCloseElements: Array,
-      positionElement: null
+      positionElement: null,
+      maxHeight: {
+        type: Boolean,
+        default: false
+      }
     },
     data () {
       return {

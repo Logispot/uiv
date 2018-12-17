@@ -2,6 +2,7 @@
   <dropdown ref="dropdown"
             v-model="open"
             tag="section"
+            :max-height="maxHeight"
             :append-to-body="appendToBody"
             :not-close-elements="elements"
             :position-element="inputEl">
@@ -82,6 +83,10 @@
       preselect: {
         type: Boolean,
         default: true
+      },
+      maxHeight: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -125,8 +130,6 @@
         this.initListeners()
       },
       value (value) {
-        console.log('value : ', value)
-        console.log('this.inputEl.value : ', this.inputEl.value.trim())
         if (isString(value)) {
           // direct
           if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '' || this.inputEl.value !== value) {

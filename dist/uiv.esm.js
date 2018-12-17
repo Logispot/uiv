@@ -635,7 +635,8 @@ var Dropdown = {
     }, [this.$slots.default, h('ul', {
       class: {
         'dropdown-menu': true,
-        'dropdown-menu-right': this.menuRight
+        'dropdown-menu-right': this.menuRight,
+        'dropdown-menu-with-max-height': this.maxHeight
       },
       ref: 'dropdown'
     }, [this.$slots.dropdown])]);
@@ -664,7 +665,11 @@ var Dropdown = {
       default: false
     },
     notCloseElements: Array,
-    positionElement: null
+    positionElement: null,
+    maxHeight: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function data() {
     return {
@@ -2955,7 +2960,7 @@ function getRequest(url) {
 }
 
 var Typeahead = { render: function render() {
-    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('dropdown', { ref: "dropdown", attrs: { "tag": "section", "append-to-body": _vm.appendToBody, "not-close-elements": _vm.elements, "position-element": _vm.inputEl }, model: { value: _vm.open, callback: function callback($$v) {
+    var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('dropdown', { ref: "dropdown", attrs: { "tag": "section", "max-height": _vm.maxHeight, "append-to-body": _vm.appendToBody, "not-close-elements": _vm.elements, "position-element": _vm.inputEl }, model: { value: _vm.open, callback: function callback($$v) {
           _vm.open = $$v;
         }, expression: "open" } }, [_c('template', { slot: "dropdown" }, [_vm._t("item", _vm._l(_vm.items, function (item, index) {
       return _c('li', { class: { active: _vm.activeIndex === index } }, [_c('a', { attrs: { "href": "#" }, on: { "click": function click($event) {
@@ -3015,6 +3020,10 @@ var Typeahead = { render: function render() {
     preselect: {
       type: Boolean,
       default: true
+    },
+    maxHeight: {
+      type: Boolean,
+      default: false
     }
   },
   data: function data() {
@@ -3062,8 +3071,6 @@ var Typeahead = { render: function render() {
       this.initListeners();
     },
     value: function value(_value) {
-      console.log('value : ', _value);
-      console.log('this.inputEl.value : ', this.inputEl.value.trim());
       if (isString(_value)) {
         // direct
         if (typeof this.inputEl.value === 'undefined' || this.inputEl.value == null || this.inputEl.value.trim() === '' || this.inputEl.value !== _value) {
